@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ETL_API.Data;
+using ETL_API.Model;
 
 namespace ETL_API.Controllers
 {
@@ -27,8 +28,8 @@ namespace ETL_API.Controllers
             if (existingToken == null)
                 return Unauthorized("Invalid or expired access token.");
 
-            if (request.Limit > 50)
-                return BadRequest("Limit cannot exceed 50.");
+            if (request.Limit > 200)
+                return BadRequest("Limit cannot exceed 200.");
 
             if (request.Page < 1 || request.Limit < 1)
                 return BadRequest("Page and limit must be greater than 0.");
@@ -39,6 +40,13 @@ namespace ETL_API.Controllers
             .ToListAsync();
 
             var totalCount = filteredData.Count;
+
+            bool shouldIndicateShortenedDateRange = totalCount > (request.Page * request.Limit);
+
+            string message = "All available results have been loaded.";
+
+            if (shouldIndicateShortenedDateRange)
+                message = "The data is too large. Only partial results are shown. Please increase the page number to see more.";
 
             var pagedData = filteredData
             .OrderBy(t => t.IssueDate)
@@ -51,6 +59,7 @@ namespace ETL_API.Controllers
                 totalCount,
                 request.Page,
                 request.Limit,
+                message,
                 results = pagedData
             });
         }
