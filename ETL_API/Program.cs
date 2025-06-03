@@ -10,7 +10,10 @@ builder.Services.AddSwaggerGen();
 //IF WANT TO KNOW THE ENCYPTED STRING OF YOUR CREDENTIALS
 //USE ENCRYPT FUNCTION TO PROCESS YOUR STRING THEN PRINT OUT TO SEE
 //EXAMPLE AS BELOW:
-//Console.WriteLine(AesEncryptionHelper.Encrypt("Hello World"));
+//Console.WriteLine(AesEncryptionHelper.Encrypt("YOKOMITSU-G,1498"));
+Console.WriteLine(AesEncryptionHelper.Encrypt("3GAUTONEW"));
+//Console.WriteLine(AesEncryptionHelper.Encrypt("Gb$$b62633933@#"));
+//Console.WriteLine(AesEncryptionHelper.Encrypt("YOKOMITSU"));
 
 string decrypted_server = AesEncryptionHelper.Decrypt(builder.Configuration.GetConnectionString("Server"));
 string decrypted_name = AesEncryptionHelper.Decrypt(builder.Configuration.GetConnectionString("Name"));

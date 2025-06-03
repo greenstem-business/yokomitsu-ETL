@@ -35,7 +35,7 @@ namespace ETL_API.Controllers
 
             if (existingName == null)
             {
-                return BadRequest("Company name does not exist in Greenplus.");
+                return BadRequest("Invalid company name. Company does not exist in Greenplus.");
             }
 
             string partnerId = "p5JYmr154e3b+2VeWp5ngKASaLK71cJZaxjiHNWe6E/OjwFFRvpIgip/ZKf8rgpO";
