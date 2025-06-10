@@ -43,6 +43,17 @@ ON ar.[Stock] = st.[Stock Code]
 LEFT JOIN Salesman_tbl sm
 ON ar.[Salesman] = sm.[Salesman Code];
 
+
+CREATE VIEW [dbo].[VW_Inventory_Quantity] AS
+SELECT 
+    sl.[Stock Code],
+	Stock.[Description],
+    [Location Code],
+    (sl.[Current Quantity] - sl.[DO Quantity] - sl.[Inv Quantity] - [Claim Quantity] - sl.[AR CN Quantity] - sl.[Pick Qty] - sl.[Service Quantity]) AS [Inventory Quantity]
+FROM Stock_Location sl
+RIGHT JOIN Stock on Stock.[Stock Code] = sl.[Stock Code];
+
+
 --API tokens table
 
 CREATE TABLE API_TOKENS
