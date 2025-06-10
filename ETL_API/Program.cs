@@ -11,7 +11,7 @@ builder.Services.AddSwaggerGen();
 //USE ENCRYPT FUNCTION TO PROCESS YOUR STRING THEN PRINT OUT TO SEE
 //EXAMPLE AS BELOW:
 //Console.WriteLine(AesEncryptionHelper.Encrypt("YOKOMITSU-G,1498"));
-Console.WriteLine(AesEncryptionHelper.Encrypt("3GAUTONEW"));
+Console.WriteLine(AesEncryptionHelper.Encrypt("DESKTOP-O3MLKHU\\SQLEXPRESS2022"));
 //Console.WriteLine(AesEncryptionHelper.Encrypt("Gb$$b62633933@#"));
 //Console.WriteLine(AesEncryptionHelper.Encrypt("YOKOMITSU"));
 

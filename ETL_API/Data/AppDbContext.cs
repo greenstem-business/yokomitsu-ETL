@@ -7,12 +7,14 @@ namespace ETL_API.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<View_SalesTransaction> SalesTransactions { get; set; }
+        public DbSet<View_InventoryQuantity> InventoryQuantities { get; set; }
         public DbSet<Token> Token { get; set; }
         public DbSet<Company> Company { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<View_SalesTransaction>().ToView("VW_Sales_Transactions").HasNoKey();
+            modelBuilder.Entity<View_InventoryQuantity>().ToView("VW_Inventory_Quantity").HasNoKey();
             modelBuilder.Entity<Token>().ToTable("API_TOKENS");
             modelBuilder.Entity<Company>().ToTable("Company").HasNoKey();
         }
