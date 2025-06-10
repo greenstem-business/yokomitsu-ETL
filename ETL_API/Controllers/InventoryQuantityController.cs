@@ -34,12 +34,10 @@ namespace ETL_API.Controllers
                 if (request.Limit > 200)
                     return BadRequest("Limit cannot exceed 200.");
 
-                if (request.Page < 0 || request.Limit < 0)
-                    return BadRequest("Page and limit must be 0 or greater.");
+                if (request.Page < 1 || request.Limit < 1)
+                    return BadRequest("Page and limit must be greater than 0.");
 
-                var data = await _context.InventoryQuantities
-                    .Where(x => string.IsNullOrEmpty(request.StockCode) || x.StockCode == request.StockCode)
-                    .ToListAsync();
+                var data = await _context.InventoryQuantities.ToListAsync();
 
                 int page = request.Page > 0 ? request.Page : 1;
                 int limit = request.Limit > 0 ? request.Limit : int.MaxValue;
@@ -78,7 +76,7 @@ namespace ETL_API.Controllers
             {
                 // Usually caused by timeouts
                 Console.WriteLine("Timeout occurred: " + ex.Message);
-                return StatusCode(504, "The request timed out. Please try again or narrow your date range.");
+                return StatusCode(504, "The request timed out. Please try again later.");
             }
             catch (Exception ex)
             {
@@ -89,7 +87,6 @@ namespace ETL_API.Controllers
 
         public class InventoryQueryRequest
         {
-            public string? StockCode { get; set; }
             public int Page { get; set; }
             public int Limit { get; set; }
         }
