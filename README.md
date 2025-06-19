@@ -28,4 +28,4 @@ A secure ETL (Extract-Transform-Load) API designed to automate retrieval of sale
 ## Usage Example
 ```bash
 # Fetch sales transactions (100 records/page)
-GET /api/sales?page=1&limit=100
+GET /api/sales/transactions?page=1&limit=100
